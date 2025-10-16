@@ -1,0 +1,8 @@
+.scroll-to-top-draggable:hover {
+  transform: scale(1.1);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+}
+
+.scroll-to-top-draggable:active {
+  transform: scale(0.95);
+}
