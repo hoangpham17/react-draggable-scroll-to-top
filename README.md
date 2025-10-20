@@ -1,194 +1,137 @@
-# React Draggable Float Button
+# React Draggable Scroll To Top
 
-[![npm version](https://img.shields.io/npm/v/react-draggable-float-btn)](https://www.npmjs.com/package/react-draggable-float-btn)
-[![npm downloads](https://img.shields.io/npm/dm/react-draggable-float-btn)](https://www.npmjs.com/package/react-draggable-float-btn)
-![License](https://img.shields.io/npm/l/react-draggable-float-btn)
+[![npm version](https://img.shields.io/npm/v/react-draggable-scroll-to-top)](https://www.npmjs.com/package/react-draggable-scroll-to-top)
+[![npm downloads](https://img.shields.io/npm/dm/react-draggable-scroll-to-top)](https://www.npmjs.com/package/react-draggable-scroll-to-top)
+![License](https://img.shields.io/npm/l/react-draggable-scroll-to-top)
 
-A lightweight, customizable draggable floating button component for React.
+A customizable, draggable scroll-to-top button component for React applications. Built with [react-draggable-float-btn](https://www.npmjs.com/package/react-draggable-float-btn).
 
 ## Features
 
-- 🎯 Fully draggable with viewport constraints
-- 🎨 Customizable styles via props or CSS classes
-- 📱 Responsive and automatically repositions on window resize
-- 🎪 TypeScript support with full type definitions
-- 🚀 Lightweight with zero dependencies
-- 💅 BEM-style CSS classes for easy customization
+- 🎯 **Draggable** - Drag and reposition anywhere on screen
+- ⚡ **Smooth scroll** - Customizable animation with duration control
+- ✨ **Fade effect** - Smooth opacity transitions when showing/hiding
+- 🚫 **Smart click** - Prevents accidental clicks after dragging
+- 📏 **Multiple sizes** - Small, medium, large presets
+- 🎨 **Fully customizable** - Styles, colors, icons, positions
+- 🔧 **TypeScript** - Full type definitions included
 
 ## Installation
 
 ```bash
-npm install react-draggable-float-btn
+npm install react-draggable-scroll-to-top
 ```
 
-## Quick Start
+or
 
-```tsx
-import { FloatingButton } from "react-draggable-float-btn";
+```bash
+yarn add react-draggable-scroll-to-top
+```
+
+## Usage
+
+### Basic Usage
+
+```jsx
+import React from "react";
+import ScrollToTopDraggable from "react-draggable-scroll-to-top";
 
 function App() {
   return (
-    <FloatingButton onClick={() => console.log("Clicked!")}>+</FloatingButton>
+    <div>
+      <ScrollToTopDraggable />
+      {/* Your content */}
+    </div>
   );
 }
 ```
 
-## Props
+### Customization
 
-| Prop              | Type                                                           | Default          | Description                                |
-| ----------------- | -------------------------------------------------------------- | ---------------- | ------------------------------------------ |
-| `children`        | `React.ReactNode`                                              | Required         | Content to display inside the button       |
-| `onClick`         | `(event: MouseEvent) => void`                                  | -                | Click handler                              |
-| `size`            | `'small' \| 'medium' \| 'large'`                               | `'medium'`       | Button size (40px / 50px / 60px)           |
-| `defaultPosition` | `'bottom-right' \| 'bottom-left' \| 'top-right' \| 'top-left'` | `'bottom-right'` | Default position                           |
-| `position`        | `{ x: number; y: number }`                                     | -                | Fixed position (overrides defaultPosition) |
-| `draggable`       | `boolean`                                                      | `true`           | Enable/disable dragging                    |
-| `disabled`        | `boolean`                                                      | `false`          | Disable button interactions                |
-| `backgroundColor` | `string`                                                       | `#ffffff`        | Background color                           |
-| `color`           | `string`                                                       | `#000000`        | Text/content color                         |
-| `borderRadius`    | `number`                                                       | `50`             | Border radius in pixels                    |
-| `boxShadow`       | `string`                                                       | CSS default      | Custom box shadow                          |
-| `zIndex`          | `number`                                                       | `1000`           | Z-index value                              |
-| `className`       | `string`                                                       | -                | Additional CSS class                       |
-| `style`           | `CSSProperties`                                                | -                | Inline styles                              |
-| `onDragStart`     | `(position: { x: number; y: number }) => void`                 | -                | Callback when drag starts                  |
-| `onDragEnd`       | `(position: { x: number; y: number }) => void`                 | -                | Callback when drag ends                    |
-
-## Examples
-
-### Different Sizes
-
-```tsx
-<FloatingButton size="small">S</FloatingButton>
-<FloatingButton size="medium">M</FloatingButton>
-<FloatingButton size="large">L</FloatingButton>
-```
-
-### Positions
-
-```tsx
-<FloatingButton defaultPosition="top-left">TL</FloatingButton>
-<FloatingButton defaultPosition="bottom-right">BR</FloatingButton>
-```
-
-### Custom Styling
-
-```tsx
-<FloatingButton
-  backgroundColor="#007bff"
-  color="#ffffff"
+```jsx
+<ScrollToTopDraggable
   size="large"
-  onClick={() => alert("Hello!")}
+  showAfter={500}
+  duration={800}
+  defaultPosition="bottom-right"
+  style={{ backgroundColor: "#4CAF50" }}
+  onClick={() => console.log("Clicked")}
+  onDragEnd={(pos) => console.log("Dragged to:", pos)}
 >
-  💬
-</FloatingButton>
+  <YourCustomIcon />
+</ScrollToTopDraggable>
 ```
 
-### Multiple Buttons
+### All Props
 
-```tsx
-<>
-  <FloatingButton defaultPosition="bottom-right">+</FloatingButton>
-  <FloatingButton defaultPosition="bottom-left">💬</FloatingButton>
-  <FloatingButton defaultPosition="top-right">🔔</FloatingButton>
-</>
-```
-
-### Non-draggable
-
-```tsx
-<FloatingButton draggable={false} position={{ x: 100, y: 100 }}>
-  📌
-</FloatingButton>
-```
-
-## Styling
-
-### CSS Classes
-
-The component uses BEM-style classes:
-
-- `.btn-float-draggable` - Base class
-- `.btn-float-draggable--{size}` - Size variants (small/medium/large)
-- `.btn-float-draggable--dragging` - Applied while dragging
-- `.btn-float-draggable--disabled` - Applied when disabled
-
-### Override Styles
-
-```css
-.btn-float-draggable {
-  background-color: #007bff !important;
-  box-shadow: 0 8px 16px rgba(0, 123, 255, 0.3) !important;
-}
-
-.btn-float-draggable--large {
-  width: 70px !important;
-  height: 70px !important;
-}
-
-.btn-float-draggable--dragging {
-  opacity: 0.8;
-  transform: scale(1.05);
-}
-```
-
-### Using Custom Classes
-
-```tsx
-<FloatingButton className="my-custom-button">Custom</FloatingButton>
-```
-
-The button will render with combined classes:
-
-```html
-<button
-  class="btn-float-draggable btn-float-draggable--medium my-custom-button"
-></button>
-```
+| Prop              | Type                                                           | Default        | Description                                              |
+| ----------------- | -------------------------------------------------------------- | -------------- | -------------------------------------------------------- |
+| `className`       | `string`                                                       | `''`           | Custom CSS class name                                    |
+| `style`           | `CSSProperties`                                                | `{}`           | Custom inline styles                                     |
+| `children`        | `ReactNode`                                                    | Arrow icon     | Custom content/icon                                      |
+| `onClick`         | `() => void`                                                   | `undefined`    | Callback when button is clicked                          |
+| `onDragStart`     | `(position: { x: number, y: number }) => void`                 | `undefined`    | Callback when drag starts with current position          |
+| `onDragEnd`       | `(position: { x: number, y: number }) => void`                 | `undefined`    | Callback when drag ends with final position              |
+| `defaultPosition` | `"bottom-right" \| "bottom-left" \| "top-right" \| "top-left"` | `bottom-right` | Initial position preset (use this OR position, not both) |
+| `position`        | `{ x: number, y: number }`                                     | `undefined`    | Controlled position                                      |
+| `draggable`       | `boolean`                                                      | `true`         | Enable/disable dragging                                  |
+| `size`            | `"small" \| "medium" \| "large"`                               | `medium`       | Size of the button                                       |
+| `showAfter`       | `number`                                                       | `300`          | Show button after scrolling X pixels                     |
+| `smooth`          | `boolean`                                                      | `true`         | Enable smooth scroll animation                           |
+| `duration`        | `number`                                                       | `500`          | Scroll animation duration (ms)                           |
+| `behavior`        | `'auto' \| 'smooth'`                                           | `'smooth'`     | Native scroll behavior                                   |
 
 ## Advanced Usage
 
-### With Drag Callbacks
+### Controlled Position
 
-```tsx
-<FloatingButton
-  onDragStart={(pos) => console.log("Drag started:", pos)}
-  onDragEnd={(pos) => console.log("Drag ended:", pos)}
->
-  📍
-</FloatingButton>
+```jsx
+const [pos, setPos] = useState({ x: 100, y: 100 });
+
+<ScrollToTopDraggable position={pos} onDragEnd={setPos} />;
 ```
 
-### With Custom Styles
+### Save Position to LocalStorage
 
-```tsx
-<FloatingButton
-  style={{
-    background: "linear-gradient(45deg, #ff6b6b, #ff8e8e)",
-    border: "3px solid #ff5252",
-  }}
->
-  ✨
-</FloatingButton>
+```jsx
+<ScrollToTopDraggable
+  onDragEnd={(pos) => localStorage.setItem("btnPos", JSON.stringify(pos))}
+/>
 ```
 
-## Development
+### Different Sizes & Positions
 
-```bash
-# Install dependencies
-npm install
-
-# Build package
-npm run build
-
-# Watch mode
-npm run dev
+```jsx
+<ScrollToTopDraggable size="small" defaultPosition="top-right" />
+<ScrollToTopDraggable size="large" defaultPosition="bottom-left" />
 ```
+
+## TypeScript
+
+Full TypeScript support with type definitions included:
+
+```typescript
+import ScrollToTopDraggable, {
+  ScrollToTopDraggableProps,
+} from "react-draggable-scroll-to-top";
+```
+
+## Notes
+
+- **Click prevention**: `react-draggable-float-btn` automatically handles click prevention after dragging
+- **Visibility**: Uses CSS opacity/visibility for smooth fade effects
+- **Position persistence**: Component stays mounted to preserve drag position
+- **Next.js**: Use `"use client"` directive for Next.js 13+ App Router
+- **Dependencies**: `react-draggable-float-btn` is automatically installed as a dependency
 
 ## License
 
 MIT
 
-## Contributing
+## Credits
 
-Contributions are welcome! Please feel free to submit a Pull Request.
+Built with [react-draggable-float-btn](https://www.npmjs.com/package/react-draggable-float-btn)
+
+---
+
+Made with ❤️ for the React community
